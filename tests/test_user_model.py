@@ -20,7 +20,7 @@ class UserModelTestCase(unittest.TestCase):
 		u = User(password='cat')
 		u2 = User(password='cat')
 		self.assertTrue(u.password_hash != u2.password_hash)
-	
+
 
 
 
