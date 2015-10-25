@@ -9,14 +9,14 @@
 {% endblock %}
 
 {% block navbar %}
-    <ul class="nav nav-bar navbar-right">
-    {% if current_user.is_authenticated %}
-    <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
-    {% else %}
-    <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
-    {% endif %}
-    </ul>
 <div class="navbar navbar-inverse" role="navigation">
+    <ul class="nav nav-bar navbar-right">
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+        {% endif %}
+    </ul>
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -33,6 +33,7 @@
             </ul>
         </div>
     </div>
+
 </div>
 {% endblock %}
 
