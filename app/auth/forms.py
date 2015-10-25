@@ -2,6 +2,7 @@ __author__ = 'zhoufei'
 from flask.ext.wtf import Form
 from wtforms import StringField ,PasswordField, BooleanField, SubmitField
 from wtforms.validators import Required, Length, Email,Regexp,EqualTo
+from wyforms import ValidationError
 from ..models import User
 
 class LoginForm(Form):
@@ -17,5 +18,10 @@ class RegistrationForm(Form):
 	submit = SubmitField('Register')
 
 	def validate_email(self,field):
+		if User.query.filter_by(email=filed.data).first():
+			raise ValidationError('Email already registered')
+	def validate_username(self,field):
+		if User.query.filter_by(username=field.data).first():
+			raise ValidationError('Username already in use.')
 
 
