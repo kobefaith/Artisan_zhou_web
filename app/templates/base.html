@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}Artisan Essay{% endblock %}
 
 {% block head %}
 {{ super() }}
@@ -9,6 +9,13 @@
 {% endblock %}
 
 {% block navbar %}
+    <ul class="nav nav-bar navbar-right">
+    {% if current_user.is_authenticated %}
+    <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+    {% else %}
+    <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+    {% endif %}
+    </ul>
 <div class="navbar navbar-inverse" role="navigation">
     <div class="container">
         <div class="navbar-header">
