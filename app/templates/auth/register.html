@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Artisan web login{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block page_content %}
     <div class="page-header">
@@ -9,8 +9,4 @@
     <div class="col-md-4">
     {{ wtf.quick_form(form) }}
     </div>
-    <p>
-       New user?
-       <a href="{{ url_for('auth.register') }}">Click here to register</a>
-    </p>
 {% endblock %}
