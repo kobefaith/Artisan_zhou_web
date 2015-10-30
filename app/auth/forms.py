@@ -18,7 +18,7 @@ class RegistrationForm(Form):
 	submit = SubmitField('Register')
 
 	def validate_email(self,field):
-		if User.query.filter_by(email=filed.data).first():
+		if User.query.filter_by(email=field.data).first():
 			raise ValidationError('Email already registered')
 	def validate_username(self,field):
 		if User.query.filter_by(username=field.data).first():
@@ -26,25 +26,25 @@ class RegistrationForm(Form):
 class ChangePasswordForm(Form):
 	old_password = PasswordField('Old password',validators=[Required()])
 	password = PasswordField('New password',validators=[Required(),EqualTo('password2',message='Passwords must match')])
-    password2 = PasswordField('Confirm new password',validators=[Required()])
-    submit = SubmitField('Update Password')
+	password2 = PasswordField('Confirm new password',validators=[Required()])
+	submit = SubmitField('Update Password')
 class PasswordResetRequestForm(Form):
 	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
 	submit = SubmitField('Reset Password')
 class PasswordResetForm(Form):
 	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
 	password = PasswordField('New password',validators=[Required(),EqualTo('password2',message='Passwords must match')])
-    password2 = PasswordField('Confirm new password',validators=[Required()])
-    submit = SubmitField('Reset Password')
-    def validate_email(self,field):
-	    if User.query.filter_by(email=field.data).first() is None:
-		  raise ValidationError('Unknow email address.')
+	password2 = PasswordField('Confirm new password',validators=[Required()])
+	submit = SubmitField('Reset Password')
+	def validate_email(self,field):
+		if User.query.filter_by(email=field.data).first() is None:
+			raise ValidationError('Unknow email address.')
 class ChangeEmailForm(Form):
 	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
 	password = PasswordField('New password',validators=[Required(),EqualTo('password2',message='Passwords must match')])
-    submit = SubmitField('Update Email Address')
-    def validate_email(self,field):
-	    if User.query.filter_by(email=field.data).first() :
-		    raise ValidationError('Email already registered.')
+	submit = SubmitField('Update Email Address')
+	def validate_email(self,field):
+		if User.query.filter_by(email=field.data).first() :
+			raise ValidationError('Email already registered.')
 
 

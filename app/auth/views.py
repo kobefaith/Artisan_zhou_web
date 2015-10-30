@@ -10,7 +10,7 @@ from .forms import RegistrationForm
 from .forms import ChangeEmailForm,ChangePasswordForm,PasswordResetRequestForm,PasswordResetForm
 from ..email import send_email
 from flask.ext.login import current_user
-
+from .. import db
 @auth.route('/login',methods=['GET','POST'])
 def login():
 	form = LoginForm()
@@ -60,7 +60,7 @@ def before_request():
 		return redirect(url_for('auth.unconfirmed'))
 @auth.route('/unconfirmed')
 def unconfirmed():
-	if current_user.is_anonymous() or current_user.confirmed:
+	if current_user.is_anonymous or current_user.confirmed:
 		return redirect(url_for('main.index'))
 	return render_template('auth/unconfirmed.html')
 @auth.route('/confirm')
