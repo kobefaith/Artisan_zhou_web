@@ -1,3 +1,4 @@
+#-*-encoding: UTF-8 -*-
 __author__ = 'zhoufei'
 
 from flask import render_template,redirect,request,url_for,flash
