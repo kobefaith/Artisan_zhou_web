@@ -1,9 +1,10 @@
 from . import db
-from flask.ext.login import UserMixin
+from flask.ext.login import UserMixin,AnonymousUserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 from . import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
+
 
 
 class Role(db.Model):
@@ -44,9 +45,15 @@ class User(UserMixin,db.Model):
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
     password_hash = db.Column(db.String(128))
     confirmed= db.Column(db.Boolean,default=False)
+    def __init__(self,**kwargs):
+        super(User,self).__init__(**kwargs)
+        if self.role is None:
+            if self.email == current_app.config['FLASKY_ADMIN']:
+                self.role = Role.query.filter_by(permission=0xff).first()
+            if self.role is None:
+                self.role = Role.query.filter_by(default=True).first()
 
-    def __repr__(self):
-        return '<User %r>' % self.username
+
     def generate_confirmation_token(self,expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'],expiration)
         return s.dumps({'confirm':self.id})
@@ -121,7 +128,10 @@ class User(UserMixin,db.Model):
         self.email = new_email
         db.session.add(self)
         return True
-
+    def can(self,permission):
+        return self.role is not None and (self.role.permissions & permission)==permission
+    def is_administrator(self):
+        return self.can(Permission.ADMINISTER)
     def __repr__(self):
         return '<User %r>' % self.username
 
@@ -134,5 +144,10 @@ class permission:
     WRITE_ARTICLES = 0x04
     MODERATE_COMMENTS = 0x08
     ADMINISTER = 0x80
-
+class AnonymousUser(AnonymousUserMixin):
+    def can(self,permission):
+        return False
+    def is_administrator(self):
+        return False
+login_manager.anonymous_user = AnonymousUser
 
