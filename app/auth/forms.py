@@ -41,7 +41,7 @@ class PasswordResetForm(Form):
 			raise ValidationError('Unknow email address.')
 class ChangeEmailForm(Form):
 	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
-	password = PasswordField('New password',validators=[Required(),EqualTo('password2',message='Passwords must match')])
+	password = PasswordField('Your password',validators=[Required()])
 	submit = SubmitField('Update Email Address')
 	def validate_email(self,field):
 		if User.query.filter_by(email=field.data).first() :

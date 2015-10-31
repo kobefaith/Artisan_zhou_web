@@ -18,4 +18,13 @@
     {% endif %}
 </div>
 {{ wtf.quick_form(form) }}
+     <br>
+     <br>
+{% if current_user.is_authenticated %}
+    <div>
+    <p>Change your password?<a href="{{ url_for('auth.change_password') }}">Click here to change your password.</a></p>
+        <br>
+    <p>Change your email?<a href="{{ url_for('auth.change_email_request') }}">Click here to change your email.</a></p>
+    </div>
+    {% endif %}
 {% endblock %}
