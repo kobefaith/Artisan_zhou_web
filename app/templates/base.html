@@ -68,7 +68,13 @@
         {{ message }}
     </div>
     {% endfor %}
-
+    {% if current_user.is_authenticated %}
+        <li>
+           <a href="{{ url_for('main.user',username=current_user.username) }}">
+               Profile
+           </a>
+        </li>
+    {% endif %}
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
