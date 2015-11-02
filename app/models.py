@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from . import login_manager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app
+from datetime import datetime
 
 
 
@@ -49,7 +50,7 @@ class User(UserMixin,db.Model):
     location = db.Column(db.String(64))
     about_me = db.Column(db.Text())
     member_since = db.Column(db.DateTime(),default = datetime.utcnow)
-    last_seen = db.Column(db.DataTime(),default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime(),default=datetime.utcnow)
 
     def ping(self):
         self.last_seen = datetime.utcnow()
@@ -147,7 +148,7 @@ class User(UserMixin,db.Model):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-class permission:
+class Permission:
     FOLLOW = 0x01
     COMMENT = 0x02
     WRITE_ARTICLES = 0x04
