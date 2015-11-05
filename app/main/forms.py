@@ -1,8 +1,10 @@
 from flask.ext.wtf import Form
-from wtforms import StringField, SubmitField,TextAreaField,BooleanField,SelectField
+from wtforms import StringField, SubmitField,TextAreaField,BooleanField,SelectField,FileField
 from wtforms.validators import Required, Length, Email,Regexp
 from wtforms import ValidationError
 from ..models import User
+from flask.ext.uploads import UploadSet, IMAGES
+from flask.ext.wtf import  file_allowed,file_required
 class NameForm(Form):
     name = StringField('What is your name?', validators=[Required()])
     submit = SubmitField('Submit')
@@ -10,6 +12,7 @@ class EditProfileForm(Form):
     name = StringField('Real name',validators=[Length(0,64)])
     location = StringField('Location',validators=[Length(0,64)])
     about_me = TextAreaField('About me')
+    image = FileField ( 'Image File',validators=[file_allowed(images,'Images only!') ] )
     submit = SubmitField('submit')
 class EditProfileAdminForm(Form):
     email = StringField('Email',validators=[Required(),Length(1,64),Email()])

@@ -40,6 +40,7 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
+        current_user.image = form.image.data
         db.session.add(current_user)
         flash('Your Profile has been updated')
         return redirect(url_for('.user',username=current_user.username))
