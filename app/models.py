@@ -51,7 +51,7 @@ class User(UserMixin,db.Model):
     about_me = db.Column(db.Text())
     member_since = db.Column(db.DateTime(),default = datetime.utcnow)
     last_seen = db.Column(db.DateTime(),default=datetime.utcnow)
-    image = db.Column(db.Blob())
+    image = db.Column(db.LargeBinary())
 
 
     def ping(self):
