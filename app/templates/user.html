@@ -24,8 +24,11 @@
     </div>
     <br>
     <div>
-        <img class="img-rounded profile-thumbnail" src="{{ user.image }}" alt="photo">
+        <img class="img-circle" src="{{ user.image }}" alt="photo">
     </div>
+    <br>
+    <br>
+    <br>
     {% if user == current_user %}
         <a class="btn btn-default" href="{{ url_for('.edit_profile') }}" role="button">
         Edit Profile
