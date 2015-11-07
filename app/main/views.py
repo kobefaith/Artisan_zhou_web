@@ -10,7 +10,7 @@ from .forms import EditProfileAdminForm
 from werkzeug import secure_filename
 import os
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads')
+UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads/')
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = NameForm()
