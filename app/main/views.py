@@ -7,6 +7,10 @@ from .forms import NameForm,EditProfileForm
 from flask.ext.login import current_user,login_user,logout_user,login_required
 from ..decorators import admin_required,permission_required
 from .forms import EditProfileAdminForm
+from werkzeug import secure_filename
+import os
+APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads')
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = NameForm()
@@ -40,8 +44,11 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
-        current_user.image = form.image.data
+        filename = secure_filename(form.image.data.filename)
+        form.image.data.save(UPLOAD_FOLDER + filename)
+        current_user.image = UPLOAD_FOLDER + filename
         db.session.add(current_user)
+        #db.session.rollback()
         flash('Your Profile has been updated')
         return redirect(url_for('.user',username=current_user.username))
     form.name.data = current_user.name

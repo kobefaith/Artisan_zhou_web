@@ -12,7 +12,7 @@ class EditProfileForm(Form):
     name = StringField('Real name',validators=[Length(0,64)])
     location = StringField('Location',validators=[Length(0,64)])
     about_me = TextAreaField('About me')
-    image = FileField ('your photo')
+    image = FileField('Your Photo')
     submit = SubmitField('submit')
 class EditProfileAdminForm(Form):
     email = StringField('Email',validators=[Required(),Length(1,64),Email()])
