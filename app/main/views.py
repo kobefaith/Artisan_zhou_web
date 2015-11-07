@@ -46,7 +46,7 @@ def edit_profile():
         current_user.about_me = form.about_me.data
         filename = secure_filename(form.image.data.filename)
         form.image.data.save(UPLOAD_FOLDER + filename)
-        current_user.image = UPLOAD_FOLDER + filename
+        current_user.image = APP_ROOT +'/uploads/' + filename
         db.session.add(current_user)
         #db.session.rollback()
         flash('Your Profile has been updated')
