@@ -37,6 +37,7 @@
     </li>
     {% endfor %}
     </ul>
+    {% include '_posts.html' %}
 {% if current_user.is_authenticated %}
     <div>
     <p>Change your password?<a href="{{ url_for('auth.change_password') }}">Click here to change your password.</a></p>
