@@ -3,7 +3,7 @@ from .. import db
 from ..models import User,Post,Permission
 from ..email import send_email
 from . import main
-from .forms import NameForm,EditProfileForm
+from .forms import NameForm,EditProfileForm,PostForm
 from flask.ext.login import current_user,login_user,logout_user,login_required
 from ..decorators import admin_required,permission_required
 from .forms import EditProfileAdminForm
