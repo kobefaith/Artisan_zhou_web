@@ -52,6 +52,7 @@ class User(UserMixin,db.Model):
     member_since = db.Column(db.DateTime(),default=datetime.utcnow)
     last_seen = db.Column(db.DateTime(),default=datetime.utcnow)
     image = db.Column(db.String(64))
+    posts = db.relationship('Post',backref='author',lazy='dynamic')
     #image = db.Column(db.LargeBinary())
 
 
@@ -163,4 +164,11 @@ class AnonymousUser(AnonymousUserMixin):
     def is_administrator(self):
         return False
 login_manager.anonymous_user = AnonymousUser
+class Post(db.Model):
+    __tablename__ = 'posts'
+    id = db.Column(db.Interger ,primary_key=True)
+    body = db.Column(db.Text)
+    timestamp = db.Column(db.DateTime,index=True,default=datetime.utcnow)
+    author_id = db.Column(db.Interger ,db.ForeignKey('users.id'))
+
 
