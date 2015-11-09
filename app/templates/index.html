@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-
+{% import "_macros.html" as macros %}
 {% block title %}Artisan Web{% endblock %}
 
 {% block page_content %}
@@ -18,6 +18,9 @@
     {% endif %}
     </div>
     {% include '_posts.html' %}
+    <div>
+    {{ macros.pagination_widget(pagination,'.index') }}
+    </div>
 {% if current_user.is_authenticated %}
     <div>
     <p>Change your password?<a href="{{ url_for('auth.change_password') }}">Click here to change your password.</a></p>
