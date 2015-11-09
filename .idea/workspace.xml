@@ -25,8 +25,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43165466">
-              <caret line="23" column="64" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
               <folding>
                 <element signature="e#0#88#0" expanded="true" />
               </folding>
@@ -166,8 +166,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="370" />
-    <option name="y" value="18" />
+    <option name="x" value="175" />
+    <option name="y" value="12" />
     <option name="width" value="1351" />
     <option name="height" value="719" />
   </component>
@@ -520,7 +520,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="370" y="18" width="1351" height="719" extended-state="0" />
+    <frame x="175" y="12" width="1351" height="719" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13258427" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -947,8 +947,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/main/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43165466">
-          <caret line="23" column="64" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
           <folding>
             <element signature="e#0#88#0" expanded="true" />
           </folding>
