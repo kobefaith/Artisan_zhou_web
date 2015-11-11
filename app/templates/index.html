@@ -21,6 +21,10 @@
     <div>
     {{ macros.pagination_widget(pagination,'.index') }}
     </div>
+    {% block script %}
+      {{ super }}
+      {{ pagedown.include_pagedown() }}
+    {% endblock%}
 {% if current_user.is_authenticated %}
     <div>
     <p>Change your password?<a href="{{ url_for('auth.change_password') }}">Click here to change your password.</a></p>
