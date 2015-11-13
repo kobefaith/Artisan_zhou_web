@@ -16,9 +16,17 @@
                      {{ post.body }}
             </div>
             <div class="post-footer">
+                {% if current_user == post.author %}
+                <a href="{{ url_for('.edit',id=post.id)}}">
+                    <span class="label label-primary">Edit</span>
+                </a>
+                {% elif current_user.is_adminstrator() %}
+                 <a href="{{ url_for('.edit',id=post.id)}}">
+                    <span class="label label-primary">Edit [Admin]</span>
+                 </a>
                 <a href="{{ url_for('.post',id=post.id) }}">
                     <span class="label label-default">Permalink</span>
-                    </a>
+                </a>
             </div>
         </div>
     </li>
