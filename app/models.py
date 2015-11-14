@@ -63,7 +63,7 @@ class User(UserMixin,db.Model):
     def __init__(self,**kwargs):
         super(User,self).__init__(**kwargs)
         if self.role is None:
-            if self.email == current_app.config['FLASKY_ADMIN']:
+            if self.email == current_app.config['ARTISAN_ADMIN']:
                 self.role = Role.query.filter_by(permission=0xff).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
@@ -180,6 +180,6 @@ class Post(db.Model):
         target.body_html = bleach.linkify(bleach.clean(
             markdown(value,output_format='html'),
             tags=allowed_tags,strip=True ))
-    db.event.listen(Post.body,'set',Post.on_changed_body)
+db.event.listen(Post.body,'set',Post.on_changed_body)
 
 
