@@ -13,7 +13,7 @@ class Config:
     ARTISAN_MAIL_SUBJECT_PREFIX = '[Artisan]'
     ARTISAN_MAIL_SENDER = 'Artisan Admin <zhoufei23.good@163.com>'
     ARTISAN_ADMIN = os.environ.get('ARTISAN_ADMIN')
-
+    ARTISAN_POSTS_PER_PAGE =10        #os.environ.get('ARTISAN_POSTS_PER_PAGE')
     @staticmethod
     def init_app(app):
         pass
