@@ -10,9 +10,9 @@ class Config:
     MAIL_USE_TLS = False
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    FLASKY_MAIL_SUBJECT_PREFIX = '[Artisan]'
-    FLASKY_MAIL_SENDER = 'Artisan Admin <zhoufei23.good@163.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    ARTISAN_MAIL_SUBJECT_PREFIX = '[Artisan]'
+    ARTISAN_MAIL_SENDER = 'Artisan Admin <zhoufei23.good@163.com>'
+    ARTISAN_ADMIN = os.environ.get('ARTISAN_ADMIN')
 
     @staticmethod
     def init_app(app):
