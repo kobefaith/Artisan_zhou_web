@@ -21,7 +21,7 @@ def index():
         return redirect(url_for('.index'))
     page = request.args.get('page', 1, type=int)
     pagination = Post.query.order_by(Post.timestamp.desc()).paginate(
-        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+        page, per_page=current_app.config['ARTISAN_POSTS_PER_PAGE'],
         error_out=False)
     posts = pagination.items
     return render_template('index.html', form=form, posts=posts,
@@ -35,8 +35,8 @@ def index():
             user = User(username=form.name.data)
             db.session.add(user)
             session['known'] = False
-            if current_app.config['FLASKY_ADMIN']:
-                send_email(current_app.config['FLASKY_ADMIN'], 'New User',
+            if current_app.config['ARTISAN_ADMIN']:
+                send_email(current_app.config['ARTISAN_ADMIN'], 'New User',
                            'mail/new_user', user=user)
         else:
             session['known'] = True
