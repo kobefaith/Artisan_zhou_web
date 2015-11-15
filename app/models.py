@@ -55,7 +55,10 @@ class User(UserMixin,db.Model):
     image = db.Column(db.String(64))
     posts = db.relationship('Post',backref='author',lazy='dynamic')
     #image = db.Column(db.LargeBinary())
-
+    def follow(self,user):
+        if not self.is_following(user):
+            f = Follow(follow=self,followed=user)
+            db.session.add(f)
 
     def ping(self):
         self.last_seen = datetime.utcnow()
