@@ -73,9 +73,19 @@ class User(UserMixin,db.Model):
     #image = db.Column(db.LargeBinary())
     def follow(self,user):
         if not self.is_following(user):
-            f = Follow(follow=self,followed=user)
-            db.session.add(f)
+            f = Follow(followed=user)
+            self.followed.append(f)
+            #db.session.add(f)
+    def unfollow(self,user):
+        f = self.followed.filter_by(followed_id =user.id ).first()
+        if f:
+            self.followed.remove(f)
+    def is_following(self,user):
+        return self.followed.filter_by(followed_id=user.id).first()
 
+    def is_followed_by(self,user):
+        return self.followers.filter_by(follower_id=user.id).first()
+    
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
