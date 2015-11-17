@@ -62,12 +62,12 @@ class User(UserMixin,db.Model):
     posts = db.relationship('Post',backref='author',lazy='dynamic')
     followed = db.relationship('Follow',
                                foreign_keys=[Follow.follower_id],
-                               backref=db.backref('follower',lazy='joined')
+                               backref=db.backref('follower',lazy='joined'),
                                lazy='dynamic',
                             cascade='all,delete-orphan')
     followers = db.relationship('Follow',
                                 foreign_keys=[Follow.followed_id],
-                                backref=db.backref('followed',lazy='joined')
+                                backref=db.backref('followed',lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all,delete-orphan')
     #image = db.Column(db.LargeBinary())
@@ -85,7 +85,7 @@ class User(UserMixin,db.Model):
 
     def is_followed_by(self,user):
         return self.followers.filter_by(follower_id=user.id).first()
-    
+
     def ping(self):
         self.last_seen = datetime.utcnow()
         db.session.add(self)
