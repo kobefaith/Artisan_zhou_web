@@ -70,6 +70,10 @@ class User(UserMixin,db.Model):
                                 backref=db.backref('followed',lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all,delete-orphan')
+    @property
+    def followed_posts(self):
+        return Post.query.join(Follow, Follow.followed_id == Post.author.id).filter(Follow.follower.id == self.id)
+
     #image = db.Column(db.LargeBinary())
     def follow(self,user):
         if not self.is_following(user):
