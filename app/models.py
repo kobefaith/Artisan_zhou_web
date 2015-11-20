@@ -70,7 +70,7 @@ class User(UserMixin,db.Model):
                                 backref=db.backref('followed',lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all,delete-orphan')
-    @property
+     @property
     def followed_posts(self):
         return Post.query.join(Follow, Follow.followed_id == Post.author.id).filter(Follow.follower.id == self.id)
 
@@ -100,6 +100,7 @@ class User(UserMixin,db.Model):
                 self.role = Role.query.filter_by(permission=0xff).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
+        self.follow(self)
 
 
     def generate_confirmation_token(self,expiration=3600):
@@ -182,7 +183,13 @@ class User(UserMixin,db.Model):
         return self.can(Permission.ADMINISTER)
     def __repr__(self):
         return '<User %r>' % self.username
-
+    @staticmethod
+    def add_self_follows():
+        for user in User.query.all():
+            if not user.is_following(user):
+                user.follow(user)
+                db.session.add(user)
+                db.session.commit()
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
