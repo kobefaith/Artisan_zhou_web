@@ -131,7 +131,7 @@ def follow(username):
     current_user.follow(user)
     flash('you are now following %s.'%username)
     return redirect(url_for('.user',username=username))
-@main.route('followers/<username>')
+@main.route('/followers/<username>')
 def followers(username):
     user=User.query.filter_by(username=username).first()
     if user is None:
