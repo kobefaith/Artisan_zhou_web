@@ -137,7 +137,7 @@ def followers(username):
     if user is None:
         flash('Invalid user.')
         return redirect(url_for('.index'))
-    page = request.args.get('page',1 type=int)
+    page = request.args.get('page',1 ,type=int)
     pagination = user.followers.paginate(page,per_page=current_app.config['ARTISAN_FOLLOWERS_PER_PAGE'],
                                          error_out=False)
     follows = [{'user':item.follower,'timestamp':item.timestamp} for item in pagination.items]
