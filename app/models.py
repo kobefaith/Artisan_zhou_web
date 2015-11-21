@@ -38,7 +38,7 @@ class Role(db.Model):
         db.session.commit()
     def __repr__(self):
         return '<Role %r>' % self.name
-class Follow(db.model):
+class Follow(db.Model):
     __tablename__='follows'
     follower_id = db.Column(db.Integer,db.ForeignKey('users.id'),
                             primary_key=True)
@@ -70,7 +70,7 @@ class User(UserMixin,db.Model):
                                 backref=db.backref('followed',lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all,delete-orphan')
-     @property
+    @property
     def followed_posts(self):
         return Post.query.join(Follow, Follow.followed_id == Post.author.id).filter(Follow.follower.id == self.id)
 
