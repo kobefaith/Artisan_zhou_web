@@ -1,44 +1,21 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-  <head>
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Artisan Essay{% endblock %}
+
+{% block head %}
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 涓婅堪3涓猰eta鏍囩*蹇呴』*鏀惧湪鏈�鍓嶉潰锛屼换浣曞叾浠栧唴瀹归兘*蹇呴』*璺熼殢鍏跺悗锛� -->
-    <title>Artisan-web</title>
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+{% endblock %}
 
-    <!-- Bootstrap -->
-   <!-- <link href="css/bootstrap.min.css" rel="stylesheet">-->
-<!-- 鏂� Bootstrap 鏍稿績 CSS 鏂囦欢 -->
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-      {% block head %}
-      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-      <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-      {% endblock %}
-  </head>
-  <body>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <!-- <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>-->
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <!-- <script src="js/bootstrap.min.js"></script>-->
-  <!-- jQuery鏂囦欢銆傚姟蹇呭湪bootstrap.min.js 涔嬪墠寮曞叆 -->
-   <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-
-  <!-- 鏈�鏂扮殑 Bootstrap 鏍稿績 JavaScript 鏂囦欢 -->
-  <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  {% block navbar %}
+{% block navbar %}
 <div class="navbar navbar-inverse" role="navigation">
     <ul class="nav nav-bar navbar-right">
         {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
         {% else %}
-            <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
+            <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
         {% endif %}
     </ul>
     <div class="container">
@@ -49,7 +26,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Artisan</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">Flasky</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -60,6 +37,7 @@
 
 </div>
 {% endblock %}
+
 {% block content %}
 <div class="container">
     {% for message in get_flashed_messages() %}
@@ -68,15 +46,19 @@
         {{ message }}
     </div>
     {% endfor %}
-    {% if current_user.is_authenticated %}
+     {% if current_user.is_authenticated %}
         <li>
            <a href="{{ url_for('main.user',username=current_user.username) }}">
                Profile
            </a>
         </li>
     {% endif %}
+
     {% block page_content %}{% endblock %}
 </div>
 {% endblock %}
-  </body>
-</html>
+
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}
