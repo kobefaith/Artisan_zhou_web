@@ -72,7 +72,7 @@ class User(UserMixin,db.Model):
                                 cascade='all,delete-orphan')
     @property
     def followed_posts(self):
-        return Post.query.join(Follow, Follow.followed_id == Post.author.id).filter(Follow.follower.id == self.id)
+        return Post.query.join(Follow, Follow.followed_id == Post.author_id).filter(Follow.follower_id == self.id)
 
     #image = db.Column(db.LargeBinary())
     def follow(self,user):
