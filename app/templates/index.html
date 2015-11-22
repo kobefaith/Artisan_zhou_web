@@ -30,8 +30,8 @@
     {{ macros.pagination_widget(pagination, '.index') }}
 </div>
 {% endif %}
-    {% block script %}
-      {{ super }}
+    {% block scripts %}
+      {{ super() }}
       {{ pagedown.include_pagedown() }}
     {% endblock%}
 {% if current_user.is_authenticated %}
