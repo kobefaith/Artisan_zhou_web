@@ -38,3 +38,7 @@ class PostForm(Form):
     #body = TextAreaField("What do you want to write?",validators=[Required()])
     body = PageDownField("What do you want to write?",validators=[Required()])
     submit = SubmitField('Submit')
+class CommentForm(Form):
+    body = StringField('',validators=[Required()])
+    submit = SubmitField('Submit')
+    
