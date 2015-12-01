@@ -187,6 +187,7 @@ class User(UserMixin,db.Model):
                 user.follow(user)
                 db.session.add(user)
                 db.session.commit()
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -218,6 +219,17 @@ class Post(db.Model):
         target.body_html = bleach.linkify(bleach.clean(
             markdown(value,output_format='html'),
             tags=allowed_tags,strip=True ))
+    def to_json(self):
+        json_post{
+            'url':url_for('api.get_post',id=self.id,_external=True),
+            'body':self.body,
+            'body_html':self.body_html,
+            'timestamp':self.timestamp,
+            'author':url_for('api.get_user',id=self.author_id,_external=True),
+            'comments':url_for('api.get_post_comments',id=self.id,_external=True),
+            'comment_count':self.comments.count()
+        }
+        return json_post
 db.event.listen(Post.body,'set',Post.on_changed_body)
 
 class Comment(db.Model):
