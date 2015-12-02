@@ -7,7 +7,7 @@ from flask import current_app
 from datetime import datetime
 from markdown import markdown
 import bleach
-
+from app.exceptions import ValidationError
 
 class Role(db.Model):
     __tablename__ = 'roles'
@@ -241,6 +241,12 @@ class Post(db.Model):
             'comment_count':self.comments.count()
         }
         return json_post
+    @staticmethod
+    def from_json(json_post):
+        body = json_post.get('body')
+        if body is None or body == '':
+            raise ValidationError('post does not have a body')
+        return Post(body=body)
 db.event.listen(Post.body,'set',Post.on_changed_body)
 
 class Comment(db.Model):
