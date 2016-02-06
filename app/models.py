@@ -188,7 +188,7 @@ class User(UserMixin,db.Model):
                 db.session.add(user)
                 db.session.commit()
     def to_json(self):
-        json_user{
+        json_user = {
             'url':url_for('api.get_post',id-self.id,_external=True),
             'username':self.username,
             'member_since':self.member_since,
@@ -231,7 +231,7 @@ class Post(db.Model):
             markdown(value,output_format='html'),
             tags=allowed_tags,strip=True ))
     def to_json(self):
-        json_post{
+        json_post = {
             'url':url_for('api.get_post',id=self.id,_external=True),
             'body':self.body,
             'body_html':self.body_html,
