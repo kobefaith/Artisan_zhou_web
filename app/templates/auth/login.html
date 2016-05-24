@@ -4,8 +4,7 @@
 {% block head %}
 <style>
         .wrap{width:200px;margin:0 auto;}
-        h1{font-size:36px;text-align:center;line-height:60px;}
-        p{font-size:20px;text-align:center;line-height:60px;}
+        .rem{width:190px;background:#fff}
         .inp{width:190px;border:1px solid #ccc;border-radius:5px;height:30px;line-height:30px;padding:5px;}
 
         #AutoComplete{background:#fff;border:1px solid #4190db;display:none;width:200px;}
@@ -24,7 +23,7 @@
         <form  action="{{ url_for('main.index')}}" method="POST">
             {{ form.email(id='email',class='inp') }}
             {{ form.password(class='inp') }}
-            {{ form.remeber_me() }}
+            {{ form.remeber_me(class='rem') }}
             {{ form.submit(value='submit',id='submit') }}
         </form>
         </div>
@@ -40,8 +39,8 @@
     <script type="text/javascript" src="jquery-1.12.3.min.js"></script>
     <script type="text/javascript" src="autoComplete.js"></script>
     <script type="text/javascript">
-    $(function(){
+    $(document).ready(function(){
          $.AutoComplete('#email');
     });
-</script>
+    </script>
 {% endblock %}
