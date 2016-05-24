@@ -2,6 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Register{% endblock %}
 {% block head %}
+     {{ super() }}
 <style>
         .wrap{width:200px;margin:0 auto;}
         .rem{width:190px;background:#fff}
@@ -36,6 +37,7 @@
     </div>
 {% endblock %}
 {% block scripts %}
+    {{ super() }}
     <script type="text/javascript" src="jquery-1.12.3.min.js"></script>
     <script type="text/javascript" src="autoComplete.js"></script>
     <script type="text/javascript">
