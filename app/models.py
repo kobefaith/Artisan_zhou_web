@@ -28,14 +28,14 @@ class Role(db.Model):
                          Permission.MODERATE_COMMENTS,False),
             'Administrator':(0xff,False)
         }
-        for r in roles:
+       for r in roles:
             role = Role.query.filter_by(name=r).first()
             if role is None:
                 role = Role(name=r)
             role.permissions = roles[r][0]
             role.default = roles[r][1]
             db.session.add(role)
-        db.session.commit()
+       db.session.commit()
     def __repr__(self):
         return '<Role %r>' % self.name
 class Follow(db.Model):
@@ -98,7 +98,7 @@ class User(UserMixin,db.Model):
         super(User,self).__init__(**kwargs)
         if self.role is None:
             if self.email == current_app.config['ARTISAN_ADMIN']:
-                self.role = Role.query.filter_by(permission=0xff).first()
+                self.role = Role.query.filter_by(permissions=0xff).first()
             if self.role is None:
                 self.role = Role.query.filter_by(default=True).first()
         self.follow(self)
