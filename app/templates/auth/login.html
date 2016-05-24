@@ -1,13 +1,33 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% block title %}Register{% endblock %}
+{% block head %}
+<style>
+        .wrap{width:200px;margin:0 auto;}
+        h1{font-size:36px;text-align:center;line-height:60px;}
+        p{font-size:20px;text-align:center;line-height:60px;}
+        .inp{width:190px;border:1px solid #ccc;border-radius:5px;height:30px;line-height:30px;padding:5px;}
 
+        #AutoComplete{background:#fff;border:1px solid #4190db;display:none;width:200px;}
+        #AutoComplete ul{list-style-type:none;margin:0;padding:0;}
+        #AutoComplete li{color:#333;cursor:pointer;font:12px/22px \5b8b\4f53;text-indent:5px;}
+        #AutoComplete .hover{background:#6eb6fe;color:#fff;}
+</style>
+{% endblock %}
 {% block page_content %}
     <div class="page-header">
             <h1>Log in</h1>
     </div>
     <div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+    <!--{{ wtf.quick_form(form) }}-->
+        <div class="wrap">
+        <form  action="{{ url_for('main.index')}}" method="POST">
+            {{ form.email(id='email',class='inp') }}
+            {{ form.password(class='inp') }}
+            {{ form.remeber_me() }}
+            {{ form.submit(value='submit',id='submit') }}
+        </form>
+        </div>
     <br>
         <p>Forgot your password?<a href="{{ url_for('auth.password_reset_request') }}">Click here to reset.</a></p>
     <p >
@@ -15,5 +35,13 @@
        <a href="{{ url_for('auth.register') }}">Click here to register</a>
     </p>
     </div>
-
+{% endblock %}
+{% block scripts %}
+    <script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+    <script type="text/javascript" src="autoComplete.js"></script>
+    <script type="text/javascript">
+    $(function(){
+         $.AutoComplete('#email');
+    });
+</script>
 {% endblock %}

@@ -21,7 +21,7 @@
                 <a href="{{ url_for('.edit',id=post.id)}}">
                     <span class="label label-primary">Edit</span>
                 </a>
-                {% elif current_user.is_adminstrator() %}
+                {% elif current_user.is_adminstrator %}
                  <a href="{{ url_for('.edit',id=post.id)}}">
                     <span class="label label-primary">Edit [Admin]</span>
                  </a>
