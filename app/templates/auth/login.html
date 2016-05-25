@@ -38,9 +38,10 @@
 {% endblock %}
 {% block scripts %}
     {{ super() }}
-    <script type="text/javascript" src="jquery-1.12.3.min.js"></script>
-    <script type="text/javascript" src="autoComplete.js"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-1.12.3.min.js',_external=True)}}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/autoComplete.js',_external=True)}}"></script>
     <script type="text/javascript">
+
     $(document).ready(function(){
          $.AutoComplete('#email');
     });
