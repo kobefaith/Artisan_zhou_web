@@ -21,10 +21,11 @@
     <div class="col-md-4">
     <!--{{ wtf.quick_form(form) }}-->
         <div class="wrap">
-        <form  action="{{ url_for('main.index')}}" method="POST">
+        <form  action="{{ url_for('auth.login')}}" method="POST">
+            {{ form.hidden_tag() }}
             {{ form.email(id='email',class='inp') }}
-            {{ form.password(class='inp') }}
-            {{ form.remeber_me(class='rem') }}
+            {{ form.password(class='inp') }}<br/><br/>
+            {{ form.remeber_me }}
             {{ form.submit(value='submit',id='submit') }}
         </form>
         </div>
