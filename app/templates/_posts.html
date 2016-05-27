@@ -3,7 +3,7 @@
     <li class="post">
         <div class="post-thumbnail">
             <a href="{{ url_for('.user', username=post.author.username) }}">
-                 <img class="img-rounded profile-thumbnail" src="{{ post.author.image }}">
+                 <img class="img-rounded profile-thumbnail" src="{{ url_for('static',filename=post.author.image,_external=True)}}">
             </a>
         </div>
         <div class="post-content">

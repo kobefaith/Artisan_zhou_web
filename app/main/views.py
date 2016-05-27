@@ -11,6 +11,7 @@ from werkzeug import secure_filename
 import os
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 UPLOAD_FOLDER = os.path.join(APP_ROOT, './uploads/')
+IMG_FOLDER = os.path.join(APP_ROOT, '../static/')
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
@@ -74,10 +75,10 @@ def edit_profile():
         current_user.location = form.location.data
         current_user.about_me = form.about_me.data
         filename = secure_filename(form.image.data.filename)
-        form.image.data.save(UPLOAD_FOLDER + filename)
+        form.image.data.save(IMG_FOLDER + filename)
         #current_user.image = APP_ROOT +'/uploads/' + filename
         #current_user.image = UPLOAD_FOLDER + filename
-        current_user.image = os.path.join(UPLOAD_FOLDER, filename)
+        current_user.image = filename
         db.session.add(current_user)
         #db.session.rollback()
         flash('Your Profile has been updated')
