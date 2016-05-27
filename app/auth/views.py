@@ -34,7 +34,7 @@ def register():
 		user = User(email=form.email.data,
 		            username=form.username.data,
 		            password=form.password.data,
-		            image="url_for('static',filename='default.jpg',_external=True)")
+		            image=url_for('static',filename='default.jpg',_external=True))
 		db.session.add(user)
 		db.session.commit()
 		token = user.generate_confirmation_token()
