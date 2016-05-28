@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/main/forms.py" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/403.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/404.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/500.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/_comments.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/_macros.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/_posts.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/change_email.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/change_password.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/change_email.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/confirm.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/email/reset_password.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/login.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/register.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/reset_password.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/auth/unconfirmed.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/base.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/edit_post.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/edit_profile.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/followers.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/index.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/mail/new_user.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/post.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/templates/user.html" charset="UTF-8" />
+  </component>
+</project>

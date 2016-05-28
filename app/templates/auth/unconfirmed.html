@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Artisan - Confirm your accont{% endblock %}
+{% block title %}飞侠岛-确认账号{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
     <h1>
-        Hello, {{ current_user.username }}!
+        您好, {{ current_user.username }}!
     </h1>
-    <h3>You have not confirmed your account yet.</h3>
+    <h3>您还没有确认您的账号.</h3>
     <p>
-        Before you can access this site you need to confirm your account.
-        Check your inbox, you should have received an email with a confirmation link.
+        在访问飞侠岛之前，您需要先确认您的账号.
+        确认账号的链接已经发送到了您的邮箱.
     </p>
     <p>
-        Need another confirmation email?
-        <a href="{{ url_for('auth.resend_confirmation') }}">Click here</a>
+        需要重新发送确认账号邮件?
+        <a href="{{ url_for('auth.resend_confirmation') }}">点击这里</a>
     </p>
 </div>
 {% endblock %}

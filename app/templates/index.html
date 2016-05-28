@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 {% import "_macros.html" as macros %}
-{% block title %}Artisan Web{% endblock %}
+{% block title %}飞侠岛{% endblock %}
 
 {% block page_content %}
 <div class="page-header">
-    Hello,
+    你好,
     {% if current_user.is_authenticated %}
         {{ current_user.username }}
     {% else %}
-        Stranger
+        菜鸟
     {% endif %}!
 </div>
     <div>
@@ -36,9 +36,9 @@
     {% endblock%}
 {% if current_user.is_authenticated %}
     <div>
-    <p>Change your password?<a href="{{ url_for('auth.change_password') }}">Click here to change your password.</a></p>
+    <p>修改密码?<a href="{{ url_for('auth.change_password') }}">修改密码点击这里.</a></p>
         <br>
-    <p>Change your email?<a href="{{ url_for('auth.change_email_request') }}">Click here to change your email.</a></p>
+    <p>更换邮箱?<a href="{{ url_for('auth.change_email_request') }}">更换用户名点击这里.</a></p>
     </div>
     {% endif %}
 {% endblock %}

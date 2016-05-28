@@ -1,3 +1,4 @@
+#-*-encoding: UTF-8 -*-
 from flask.ext.wtf import Form
 from wtforms import StringField, SubmitField,TextAreaField,BooleanField,SelectField,FileField
 from wtforms.validators import Required, Length, Email,Regexp
@@ -30,13 +31,13 @@ class EditProfileAdminForm(Form):
         self.user = user
     def validate_email(self,field):
         if field.data != self.user.email and User.query.filter_by(email=field.data).first():
-            raise ValidationError('Email already registered.')
+            raise ValidationError('The email have been registed.')
     def validate_username(self,field):
         if field.data != self.user.username and User.query.filter_by(username=field.data).first():
-            raise ValidationError('Username already in use.')
+            raise ValidationError('The username has been used.')
 class PostForm(Form):
     #body = TextAreaField("What do you want to write?",validators=[Required()])
-    body = PageDownField("What do you want to write?",validators=[Required()])
+    body = PageDownField("What do you want to write",validators=[Required()])
     submit = SubmitField('Submit')
 class CommentForm(Form):
     body = StringField('',validators=[Required()])

@@ -1,6 +1,6 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}Artisan Essay{% endblock %}
+{% block title %}飞侠岛{% endblock %}
 
 {% block head %}
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
 <div class="navbar navbar-inverse" role="navigation">
     <ul class="nav nav-bar navbar-right">
         {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('auth.logout') }}">Sign Out</a></li>
+            <li><a href="{{ url_for('auth.logout') }}">退出</a></li>
         {% else %}
-            <li><a href="{{ url_for('auth.login') }}">Sign In</a></li>
+            <li><a href="{{ url_for('auth.login') }}">登录</a></li>
         {% endif %}
     </ul>
     <div class="container">
@@ -27,11 +27,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Artisan</a>
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">飞侠岛</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.index') }}">Home</a></li>
+                <li><a href="{{ url_for('main.index') }}">主页</a></li>
             </ul>
         </div>
     </div>

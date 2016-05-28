@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
-{% block title %}Register{% endblock %}
+{% block title %}注册{% endblock %}
 {% block head %}
      {{ super() }}
 <style>
@@ -16,7 +16,7 @@
 {% endblock %}
 {% block page_content %}
     <div class="page-header">
-            <h1>Log in</h1>
+            <h1>登录</h1>
     </div>
     <div class="col-md-4">
     <!--{{ wtf.quick_form(form) }}-->
@@ -25,15 +25,15 @@
             {{ form.hidden_tag() }}
             {{ form.email(id='email',class='inp') }}
             {{ form.password(class='inp') }}<br/><br/>
-            {{ form.remeber_me }}<p>Keep me logged in</p><br/><br/>
-            {{ form.submit(value='submit',id='submit') }}
+            {{ form.remeber_me }}<p>保持登录状态</p><br/><br/>
+            {{ form.submit(value='登录',id='submit') }}
         </form>
         </div>
     <br>
-        <p>Forgot your password?<a href="{{ url_for('auth.password_reset_request') }}">Click here to reset.</a></p>
+        <p>忘记密码?<a href="{{ url_for('auth.password_reset_request') }}">点击这里重置密码.</a></p>
     <p >
-       New user?
-       <a href="{{ url_for('auth.register') }}">Click here to register</a>
+       菜鸟?
+       <a href="{{ url_for('auth.register') }}">点击这里注册</a>
     </p>
     </div>
 {% endblock %}
