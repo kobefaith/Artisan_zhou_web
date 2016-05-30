@@ -13,13 +13,13 @@ oauth = OAuth(app)
 
 renren = oauth.remote_app(
     'renren',
-    consumer_key=d6262e9fe5be47adaaeb7fb7a6903e46,
-    consumer_secret=143e08f60cb3451bb5e451b068581b66,
+    consumer_key='d6262e9fe5be47adaaeb7fb7a6903e46',
+    consumer_secret='143e08f60cb3451bb5e451b068581b66',
     base_url='https://graph.renren.com',
     request_token_url=None,
     request_token_params={'scope': 'get_user_info'},
     access_token_url='/oauth/token',
-    authorize_url='/oauth/authorize',
+    authorize_url='/oauth/authorize'
 )
 
 
