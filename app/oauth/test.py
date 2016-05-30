@@ -11,15 +11,15 @@ app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
 
-qq = oauth.remote_app(
-    'qq',
-    consumer_key=QQ_APP_ID,
-    consumer_secret=QQ_APP_KEY,
-    base_url='https://graph.qq.com',
+renren = oauth.remote_app(
+    'renren',
+    consumer_key=d6262e9fe5be47adaaeb7fb7a6903e46,
+    consumer_secret=143e08f60cb3451bb5e451b068581b66,
+    base_url='https://graph.renren.com',
     request_token_url=None,
     request_token_params={'scope': 'get_user_info'},
-    access_token_url='/oauth2.0/token',
-    authorize_url='/oauth2.0/authorize',
+    access_token_url='/oauth/token',
+    authorize_url='/oauth/authorize',
 )
 
 
@@ -36,12 +36,11 @@ def json_to_dict(x):
         return x
 
 
-def update_qq_api_request_data(data={}):
+def update_renren_api_request_data(data={}):
     '''Update some required parameters for OAuth2.0 API calls'''
-    defaults = {
-        'openid': session.get('qq_openid'),
-        'access_token': session.get('qq_token')[0],
-        'oauth_consumer_key': QQ_APP_ID,
+    defaults = {        
+        'access_token': session.get('renren_token')[0],
+        'oauth_consumer_key': d6262e9fe5be47adaaeb7fb7a6903e46,
     }
     defaults.update(data)
     return defaults
@@ -56,46 +55,46 @@ def index():
 
 @app.route('/user_info')
 def get_user_info():
-    if 'qq_token' in session:
-        data = update_qq_api_request_data()
-        resp = qq.get('/user/get_user_info', data=data)
-        return jsonify(status=resp.status, data=resp.data)
+    if 'renren_token' in session:
+        return redirect(session['user']['avatar'][0]['url'])
+        #data = update_renren_api_request_data()        
+        #resp = renren.get('/user/get_user_info', data=data)
+        #return jsonify(status=resp.status, data=resp.data)
     return redirect(url_for('login'))
 
 
 @app.route('/login')
 def login():
-    return qq.authorize(callback=url_for('authorized', _external=True))
+    return renren.authorize(callback=url_for('authorized', _external=True))
 
 
 @app.route('/logout')
 def logout():
-    session.pop('qq_token', None)
+    session.pop('renren_token', None)
     return redirect(url_for('get_user_info'))
 
 
 @app.route('/login/authorized')
 def authorized():
-    resp = qq.authorized_response()
+    resp = renren.authorized_response()
     if resp is None:
         return 'Access denied: reason=%s error=%s' % (
             request.args['error_reason'],
             request.args['error_description']
         )
-    session['qq_token'] = (resp['access_token'], '')
+    session['renren_token'] = (resp['access_token'], '')
 
     # Get openid via access_token, openid and access_token are needed for API calls
-    resp = qq.get('/oauth2.0/me', {'access_token': session['qq_token'][0]})
+    #resp = renren.get('/oauth2.0/me', {'access_token': session['renren_token'][0]})
     resp = json_to_dict(resp.data)
     if isinstance(resp, dict):
-        session['qq_openid'] = resp.get('openid')
-
+        session['user'] = resp.get('user')
     return redirect(url_for('get_user_info'))
 
 
-@qq.tokengetter
-def get_qq_oauth_token():
-    return session.get('qq_token')
+@renren.tokengetter
+def get_renren_oauth_token():
+    return session.get('renren_token')
 
 
 if __name__ == '__main__':
