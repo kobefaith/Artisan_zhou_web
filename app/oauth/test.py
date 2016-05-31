@@ -3,8 +3,8 @@ import json
 from flask import Flask, redirect, url_for, session, request, jsonify, Markup
 from flask_oauthlib.client import OAuth
 
-QQ_APP_ID = os.getenv('QQ_APP_ID', '101187283')
-QQ_APP_KEY = os.getenv('QQ_APP_KEY', '993983549da49e384d03adfead8b2489')
+RR_APP_ID = os.environ.get('RENREN_APP_ID')
+RR_APP_KEY = os.environ.get('RENREN_APP_KEY')
 
 app = Flask(__name__)
 app.debug = True
@@ -20,11 +20,6 @@ renren = oauth.remote_app(
     access_token_url='/oauth/token',
     authorize_url='/oauth/authorize'
 )
-@app.route('/')
-def index():
-    '''just for verify website owner here.'''
-    return Markup('''<meta property="qc:admins" '''
-                  '''content="226526754150631611006375" />''')
 
 
 @app.route('/user_info')
