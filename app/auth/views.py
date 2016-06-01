@@ -11,6 +11,9 @@ from .forms import ChangeEmailForm,ChangePasswordForm,PasswordResetRequestForm,P
 from ..email import send_email
 from flask.ext.login import current_user
 from .. import db
+from .. import oauth
+import os
+from flask import session
 @auth.route('/login',methods=['GET','POST'])
 def login():
 	form = LoginForm()
@@ -143,7 +146,58 @@ def change_email(token):
         flash('Invalid request.')
     return redirect(url_for('main.index'))
 
+RR_APP_ID = os.environ.get('RENREN_APP_ID')
+RR_APP_KEY = os.environ.get('RENREN_APP_KEY')
 
+renren = oauth.remote_app(
+    'renren',
+    consumer_key=RR_APP_ID,
+    consumer_secret=RR_APP_KEY,
+    base_url='https://graph.renren.com',
+    request_token_url=None,
+    access_token_url='/oauth/token',
+    authorize_url='/oauth/authorize'
+)
+
+
+@auth.route('/user_info')
+def get_user_info():
+    if 'renren_token' in session:
+        return redirect(session['user']['avatar'][0]['url'])
+    return redirect(url_for('auth.login'))
+
+
+@auth.route('/third_login/renren')
+def third_login():
+    return renren.authorize(callback=url_for('auth.authorized', _external=True))
+
+
+@auth.route('/third_logout')
+@login_required
+def third_logout():
+    session.pop('renren_token', None)
+    return redirect(url_for('auth.get_user_info'))
+
+
+@auth.route('/login/authorized')
+def authorized():
+    resp = renren.authorized_response()
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['renren_token'] = (resp['access_token'], '')
+
+    # Get openid via access_token, openid and access_token are needed for API calls
+    if isinstance(resp, dict):
+        session['user'] = resp.get('user')
+    return redirect(url_for('auth.get_user_info'))
+
+
+@renren.tokengetter
+def get_renren_oauth_token():
+    return session.get('renren_token')
 
 
 
