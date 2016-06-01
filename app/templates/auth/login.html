@@ -12,6 +12,17 @@
         #AutoComplete ul{list-style-type:none;margin:0;padding:0;}
         #AutoComplete li{color:#333;cursor:pointer;font:12px/22px \5b8b\4f53;text-indent:5px;}
         #AutoComplete .hover{background:#6eb6fe;color:#fff;}
+
+       ul{
+          list-style-type:none;
+          margin:0;
+          padding:0;
+          padding-top:6px;
+          padding-bottom:6px;
+       }
+       li{
+          display:inline;
+        }
 </style>
 {% endblock %}
 {% block page_content %}
@@ -30,6 +41,14 @@
         </form>
         </div>
     <br>
+        <ul>
+           <li><a href="{{ url_for('auth.third_login') }}"><img style="width:50px;height:50px;" src="{{ url_for('static',filename='oauth/renren.jpg',_external=True) }}">
+</a></li>
+           <li><a href="http://www.cn.bing.com"> <img style="width:50px;height:50px;" src="{{ url_for('static',filename='oauth/weibo.jpg',_external=True) }}">
+</a></li>
+           <li><a href="http://www.jikexueyuan.com"><img style="width:50px;height:50px;" src="{{ url_for('static',filename='oauth/weixin.jpg',_external=True) }}">
+</a></li>
+         </ul>
         <p>忘记密码?<a href="{{ url_for('auth.password_reset_request') }}">点击这里重置密码.</a></p>
     <p >
        菜鸟?
