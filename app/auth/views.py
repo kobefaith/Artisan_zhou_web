@@ -7,6 +7,7 @@ from . import auth
 from ..models import User
 from .forms import LoginForm
 from .forms import RegistrationForm
+from .forms import Third_RegistrationForm
 from .forms import ChangeEmailForm,ChangePasswordForm,PasswordResetRequestForm,PasswordResetForm
 from ..email import send_email
 from flask.ext.login import current_user
@@ -45,6 +46,18 @@ def register():
 		flash('A confirmation email has been sent to you by email')
 		return redirect(url_for('main.index'))
 	return render_template('auth/register.html',form=form)
+@auth.route('/third_register',methods=['GET','POST'])
+def third_register():
+	form = Third_RegistrationForm()
+	if form.validate_on_submit():
+		user = User(username=session['user']['name'],
+		            phoneNo=form.phoneNo.data,
+		            image=session['user']['avatar'][0]['url'])
+		db.session.add(user)
+		db.session.commit()
+		login_user(user,True)
+		return redirect(url_for('main.index'))
+	return render_template('auth/third_register.html',form=form)
 @auth.route('/confirm/<token>')
 @login_required
 def confirm(token):
