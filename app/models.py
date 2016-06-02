@@ -71,6 +71,7 @@ class User(UserMixin,db.Model):
                                 lazy='dynamic',
                                 cascade='all,delete-orphan')
     comments = db.relationship('Comment',backref='author',lazy='dynamic')
+    phoneNo = db.Column(db.String(11),unique=True,index=True)
     @property
     def followed_posts(self):
         return Post.query.join(Follow, Follow.followed_id == Post.author_id).filter(Follow.follower_id == self.id)
