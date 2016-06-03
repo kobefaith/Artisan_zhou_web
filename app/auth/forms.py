@@ -24,11 +24,12 @@ class RegistrationForm(Form):
 		if User.query.filter_by(username=field.data).first():
 			raise ValidationError('Username already in use.')
 class Third_RegistrationForm(Form):
-	phoneNo = StringField('phoneNo',validators=[Required(),Length(11,11),Regexp('[0-9]')])
+	email = StringField('Email',validators=[Required(),Length(1,64),Email()])
+	username = StringField('Username',validators=[Required(),Length(1,64),Regexp('^[A-Za-z][A-Za-z0-9_.]*$',0,'Usernames must have only letter,''numbers,dot or underscores')])
 	submit = SubmitField('Register')
-	def validate_phoneNo(self,field):
-		if User.query.filter_by(phoneNo=field.data).first():
-			raise ValidationError('phoneNo already registered')
+	def validate_email(self,field):
+		if User.query.filter_by(email=field.data).first():
+			raise ValidationError('email already registered')
 class ChangePasswordForm(Form):
 	old_password = PasswordField('Old password',validators=[Required()])
 	password = PasswordField('New password',validators=[Required(),EqualTo('password2',message='Passwords must match')])
