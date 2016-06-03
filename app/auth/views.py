@@ -50,11 +50,14 @@ def register():
 def third_register():
 	form = Third_RegistrationForm()
 	if form.validate_on_submit():
-		user = User(username=session['user']['name'],
-		            phoneNo=form.phoneNo.data,
+		user = User(email=form.email.data,
+		            username=form.username.data,
 		            image=session['user']['avatar'][0]['url'])
 		db.session.add(user)
 		db.session.commit()
+		token = user.generate_confirmation_token()
+		send_email(user.email,'Confirm Your Account','auth/email/confirm',user=user,token=token)
+		flash('A confirmation email has been sent to you by email')
 		login_user(user,True)
 		return redirect(url_for('main.index'))
 	return render_template('auth/third_register.html',form=form)
@@ -176,7 +179,8 @@ renren = oauth.remote_app(
 @auth.route('/user_info')
 def get_user_info():
     if 'renren_token' in session:
-        return redirect(session['user']['avatar'][0]['url'])
+	    return redirect(url_for('auth.third_register'))
+        #return redirect(session['user']['avatar'][0]['url'])
     return redirect(url_for('auth.login'))
 
 
