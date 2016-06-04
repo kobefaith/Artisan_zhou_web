@@ -50,6 +50,10 @@ def register():
 def third_register():
 	form = Third_RegistrationForm()
 	if form.validate_on_submit():
+		user = User.query.filter_by(email=form.email.data).first()
+		if (user):
+			login_user(user,True)
+			return redirect(url_for('main.index'))
 		user = User(email=form.email.data,
 		            username=form.username.data,
 		            image=session['user']['avatar'][0]['url'])
